@@ -1,7 +1,8 @@
 name: CI
 on: [push]
 jobs:
-  build:
+  job_1:
+    name: Render site
     runs-on: ubuntu-latest
     container: rocker/tidyverse:latest
     steps:
@@ -10,6 +11,20 @@ jobs:
       run: Rscript -e 'install.packages("distill")'
     - name: Build site
       run: Rscript -e 'rmarkdown::render_site()'
+    - name: Download rendered site
+      uses: actions/upload-artifact@v1
+      with:
+        name: site
+        path: ./_site
+  job_2:
+    name: Deploy site
+    needs: job_1
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download site from job 1
+      uses: actions/download-artifact@v1
+      with:
+        name: site
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -18,7 +33,7 @@ jobs:
         aws-region: eu-west-1
     - name: Deploy static site to S3 bucket
       run: |
-        aws s3 sync ./_site/ s3://nickforr.com --delete
+        aws s3 sync _site/ s3://nickforr.com --delete
         aws configure set preview.cloudfront true
         aws cloudfront create-invalidation --distribution-id E9H499YI00XN5 --paths '/*'
         
