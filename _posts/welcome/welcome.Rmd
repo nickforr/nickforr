@@ -1,24 +1,22 @@
 ---
-title: "Welcome to My Blog"
+title: "Continuous integration with github actions"
 description: |
-  Welcome to our new blog, My Blog. We hope you enjoy 
-  reading what we have to say!
-author:
-  - name: Nick Forrester 
-    url: https://nickforr.com
+  As part of revamping website, switching to github actions from travis.
 date: 04-29-2020
+categories:
+  - continuous integration
 output:
   distill::distill_article:
     self_contained: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+Reading this [article](https://blog.r-hub.io/2020/04/29/maintenance/), I thought 
+I might revisit my attempt at a personal website. 
 
-# Learn more about creating blogs with Distill at:
-# https://rstudio.github.io/distill/blog.html
+This includes switching from [blogdown](https://bookdown.org/yihui/blogdown/) to
+[distill](https://rstudio.github.io/distill/) (mainly just for a change) and 
+also trying github actions rather than travis (partly because I've been using 
+Azure DevOps pipeline builds at work).
 
-```
-
-
+For now this is a work-in-progress, with this post part of the setup testing.
 

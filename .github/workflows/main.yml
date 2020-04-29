@@ -6,10 +6,8 @@ jobs:
     container: rocker/r-ver:latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install core dependencies
-        run: Rscript -e 'install.packages(c("attachment", "remotes"))'
-    - name: Install dependencies
-        run: Rscript -e 'remotes::update_packages(c(attachment::att_from_rscripts("."), attachment::att_from_rmds(".")), dependencies = TRUE, lib = Sys.getenv("R_LIBS_USER"), Ncpus = 2)'
+    - name: Install rmarkdown
+        run: Rscript -e 'install.packages("rmarkdown")'
     - name: Build site
         run: Rscript -e 'rmarkdown::render_site()'
     - name: Configure AWS Credentials
