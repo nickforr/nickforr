@@ -3,11 +3,11 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: rocker/r-ver:latest
+    container: rocker/tidyverse:latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install rmarkdown
-      run: sudo install2.r --error --deps TRUE rmarkdown distill
+    - name: Install distill
+      run: Rscript -e 'install.packages("distill")'
     - name: Build site
       run: Rscript -e 'rmarkdown::render_site()'
     - name: Configure AWS Credentials
