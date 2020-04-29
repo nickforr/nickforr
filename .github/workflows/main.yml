@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install rmarkdown
-      run: Rscript -e 'install.packages(c("rmarkdown", "distill"), dependencies = TRUE)'
+      run: sudo install2.r --error --deps TRUE rmarkdown distill
     - name: Build site
       run: Rscript -e 'rmarkdown::render_site()'
     - name: Configure AWS Credentials
